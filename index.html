@@ -29,7 +29,7 @@
     </div>
     
   </div>
-  <canvas id="unity-canvas" tabindex="-1" style="width: 100%; height: 100vh; background: black"></canvas>
+  <canvas id="unity-canvas" tabindex="-1" style="background: black"></canvas>
   <script>
     var body =  document.getElementById("body");
     var loadingOverlayBarra = document.getElementById("loadingOverlayBarra");
@@ -51,39 +51,46 @@
       companyName: "MarcosDev",
       productName: "Dourinho",
       productVersion: "0.1",
- //     devicePixelRatio: window.devicePixelRatio,
+      devicePixelRatio: 1.5,
       matchWebGLToCanvasSize: true
     };
 
-    function redimensionarCanvas() {
-  // const canvas = document.getElementById('meuCanvas');
+   function redimensionarCanvas() {
+  // 1. Captura o elemento do canvas da Unity (coloque o ID correto do seu HTML)
+  // const canvas = document.getElementById('unity-canvas') || document.getElementById('meuCanvas');
+  if (!canvas) return;
+
   const proporcao = 16 / 9;
   
-  // Define a largura baseada na tela
+  // 2. Define a largura baseada na tela
   let largura = window.innerWidth;
   let altura = largura / proporcao;
 
-  // Se a altura calculada for maior que a tela, ajusta pela altura
+  // 3. Se a altura calculada ultrapassar a tela, ajusta pela altura
   if (altura > window.innerHeight) {
     altura = window.innerHeight;
     largura = altura * proporcao;
   }
 
-  // Define o tamanho CSS
+  // 4. Aplica o tamanho visual via CSS (O cálculo que você fez e está perfeito)
   canvas.style.width = largura + 'px';
   canvas.style.height = altura + 'px';
   
-  // Define o tamanho interno do canvas (resolução)
-  canvas.width = largura;
-  canvas.height = altura;
+  // NOTA: Evite alterar canvas.width e canvas.height diretamente aqui para não 
+  // forçar a Unity a reiniciar o contexto de renderização toda vez que a tela mudar.
 }
+
+// Executa ao carregar a página e sempre que a janela mudar de tamanho
+window.addEventListener('resize', redimensionarCanvas);
+window.addEventListener('load', redimensionarCanvas);
 
 window.addEventListener('resize', redimensionarCanvas);
 redimensionarCanvas(); // Executa ao carregar
 
-setInterval(()=>{
-redimensionarCanvas(); 
-}, 2000)
+// setInterval(()=>{
+// redimensionarCanvas(); 
+// console.log("Redimenciona")
+// }, 1000)
 
     var fullscreenMode = 0;
 

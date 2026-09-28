@@ -14,9 +14,9 @@
 }
 
 #unity-canvas{
-  left: 0px;
+  /* left: 0px;
   top: 0px;
-  width: 100%;
+  width: 100%; */
 
   /* position: absolute; */
   border: none;
@@ -24,6 +24,11 @@
   
   aspect-ratio: 16 / 9;
   object-fit: contain; /* Ou 'cover' se quiser preencher tudo e cortar */
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
 }
 
