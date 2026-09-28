@@ -1,0 +1,22 @@
+/Build/*
+  Access-Control-Allow-Origin: https://horizon-infinite.vercel.app
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Access-Control-Allow-Headers: *
+
+/Build/*.data.gz
+  Content-Type: application/octet-stream
+  Content-Encoding: gzip
+
+/Build/*.framework.js.gz
+  Content-Type: application/javascript
+  Content-Encoding: gzip
+
+/Build/*.wasm.gz
+  Content-Type: application/wasm
+  Content-Encoding: gzip
+
+/Build/*.loader.js
+  Content-Type: application/javascript
+
+/Build/*.json
+  Content-Type: application/json
