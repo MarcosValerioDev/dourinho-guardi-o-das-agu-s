@@ -81,7 +81,9 @@
 window.addEventListener('resize', redimensionarCanvas);
 redimensionarCanvas(); // Executa ao carregar
 
-
+setInterval(()=>{
+redimensionarCanvas(); 
+}, 2000)
 
     var fullscreenMode = 0;
 
