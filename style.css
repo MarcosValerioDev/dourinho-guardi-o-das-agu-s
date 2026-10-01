@@ -135,3 +135,56 @@
   z-index: 1;
   margin-top: 2px;
 }
+
+/* PWA: botão de instalação e dica para iOS */
+[hidden] {
+  display: none !important;
+}
+
+.btn-instalar {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100001;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #06328F;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.btn-instalar:hover {
+  filter: brightness(1.15);
+}
+
+.btn-instalar:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.dica-ios {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 100002;
+  width: min(90vw, 360px);
+  padding: 16px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  color: #031441;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.dica-ios .btn-instalar {
+  position: static;
+  margin-top: 12px;
+}

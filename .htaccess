@@ -21,3 +21,7 @@ AddType application/wasm .wasm
 # AddEncoding br .unityweb
 
 </IfModule>
+# PWA: tipo correto do manifest
+<IfModule mod_mime.c>
+AddType application/manifest+json .webmanifest
+</IfModule>

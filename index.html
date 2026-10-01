@@ -5,8 +5,15 @@
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0">
-  <title>Saúde Bucal</title>
+  <title>Dourinho - O guardião das águas</title>
   <link rel="shortcut icon" href="favicon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#06328F">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Dourinho">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +37,66 @@
     
   </div>
   <canvas width="1280" height="720" id="unity-canvas" tabindex="-1" style="background: black"></canvas>
+
+  <button id="btnInstalar" class="btn-instalar" type="button" hidden>Instalar app</button>
+  <div id="dicaIos" class="dica-ios" hidden>
+    <p>Para instalar no iPhone/iPad, toque em <strong>Compartilhar</strong> e depois em
+      <strong>Adicionar à Tela de Início</strong>.</p>
+    <button id="btnFecharDica" class="btn-instalar" type="button">Entendi</button>
+  </div>
+
+  <script>
+    // PWA: registra o service worker e controla o botão de instalação.
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch((erro) => console.warn("Falha ao registrar o service worker:", erro));
+      });
+    }
+
+    (function () {
+      var btnInstalar = document.getElementById("btnInstalar");
+      var dicaIos = document.getElementById("dicaIos");
+      var promptInstalacao = null;
+
+      var jaInstalado = window.matchMedia("(display-mode: standalone)").matches ||
+        window.matchMedia("(display-mode: fullscreen)").matches ||
+        window.navigator.standalone === true;
+      // O Safari do iOS não tem o evento beforeinstallprompt; lá só dá para orientar o usuário.
+      var ehIos = /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+      if (jaInstalado) return;
+      if (ehIos) btnInstalar.hidden = false;
+
+      window.addEventListener("beforeinstallprompt", (evento) => {
+        evento.preventDefault();
+        promptInstalacao = evento;
+        btnInstalar.hidden = false;
+      });
+
+      btnInstalar.addEventListener("click", () => {
+        if (promptInstalacao) {
+          promptInstalacao.prompt();
+          promptInstalacao.userChoice.then(() => {
+            promptInstalacao = null;
+            btnInstalar.hidden = true;
+          });
+        } else if (ehIos) {
+          dicaIos.hidden = false;
+        }
+      });
+
+      document.getElementById("btnFecharDica").addEventListener("click", () => {
+        dicaIos.hidden = true;
+      });
+
+      window.addEventListener("appinstalled", () => {
+        promptInstalacao = null;
+        btnInstalar.hidden = true;
+      });
+    })();
+  </script>
+
   <script>
     var body =  document.getElementById("body");
     var loadingOverlayBarra = document.getElementById("loadingOverlayBarra");

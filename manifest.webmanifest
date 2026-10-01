@@ -1,0 +1,27 @@
+{
+  "name": "Dourinho - O guardião das águas",
+  "short_name": "Dourinho",
+  "description": "Jogo educativo sobre consciência ambiental para crianças.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "landscape",
+  "background_color": "#171717",
+  "theme_color": "#06328F",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
